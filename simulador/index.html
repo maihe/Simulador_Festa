@@ -423,7 +423,7 @@
 
         $("#input_form").fadeOut(1, ()=> {
 
-            //DRINKS
+            /*DRINKS*/
             var champ_party = Math.round(0.5 * totalGuest);
             var champ_cheers = Math.round(0.125 * totalGuest);
             var wisky_liter = Math.round(0.1 * totalGuest);
@@ -435,17 +435,17 @@
             var water = Math.round(0.2 * totalGuest);
             var fruit_cocktail = Math.round(0.03 * totalGuest);
 
-        //MEAT
+        /*MEAT*/
         var dish_meat = Math.round(0.25 * totalGuest);
-        //BBQ
+        /*BBQ*/
         var bbq_meat = Math.round(0.4 * totalGuest);
 
-        //BUFFET SIDE DISH
+        /*BUFFET SIDE DISH*/
         var rice = Math.round(0.08 * totalGuest);
         var risotto = Math.round(0.1 * totalGuest);
         var farofa = Math.round(0.08 * totalGuest);
 
-        //SWEET STUFF
+        /*SWEET STUFF*/
         var wo_dessert = Math.round(7 * totalGuest);
         var after_dessert = Math.round(3 * totalGuest);
         var cake_wo_dessert = Math.round(0.1 * totalGuest);
@@ -454,27 +454,27 @@
         var icecream = Math.round(0.1 * totalGuest);
         var cupcakes = Math.round(1.5 * totalGuest);
 
-        //SNACKS
+        /*SNACKS*/
         var cocktail_snacks = Math.round(15 * totalGuest);
         var w_dinner = Math.round(7 * totalGuest);
 
-        //BUFFET MEATS
+        /*BUFFET MEATS*/
         var red_meat = Math.round(0.15 * totalGuest);
         var chicken = Math.round(0.1 * totalGuest);
         var fish = Math.round(0.08 * totalGuest);
 
-        //PASTA
+        /*PASTA*/
         var side_pasta = Math.round(0.12 * totalGuest);
         var pasta = Math.round(0.2 * totalGuest);
 
-        //BUFFET SALAD
+        /*BUFFET SALAD*/
         var mixed_leaves = Math.round(0.08 * totalGuest);
         var boiled_vegetables = Math.round(0.08 * totalGuest);
         var potato_cassava = Math.round(0.08 * totalGuest);
 
         var finger_food = Math.round(20 * totalGuest);
 
-        //BREAD
+        /*BREAD*/
         var bread = Math.round(3 * totalGuest);
         var cold_cuts_bread = Math.round(0.1 * totalGuest);
         var cold_cuts = Math.round(0.15 * totalGuest);
@@ -518,8 +518,7 @@
         document.getElementById("cold_cuts").innerText = cold_cuts;
 
         $("#result_tables").fadeIn();
-    })
-;
+            });
 
 }
 
@@ -533,7 +532,7 @@ function back() {
 function print_result() {
     window.print();
 }
-
+        $('#verResultado').on('click', calculate);
 
 </script>
 
