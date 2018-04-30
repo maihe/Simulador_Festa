@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="row">
-                <button type="button" class="btn btn-primary btn-lg btn-block col-md-4" onclick="calculate()">Ver resultado</button>
+                <button id="verResultado" type="button" class="btn btn-primary btn-lg btn-block col-md-4">Ver resultado</button>
             </div>
         </div>
 
@@ -59,17 +59,25 @@
 
     </form>
 
+
+
+
+
+
+
+
     <div id="result_tables" class="container mt-5" style="display:none;">
 
         <div class="row d-print-none">
             <div class="col-md-6 mb-3">
-                <button type="button" class="btn btn-primary btn-md btn-block" onclick="back()">Voltar</button>
+                <button id="backBtn" type="button" class="btn btn-primary btn-md btn-block">Voltar</button>
             </div>
             <div class="col-md-6 mb-3">
-                <button type="button" class="btn btn-secondary btn-md btn-block" onclick="print_result()">Imprimir</button>
+                <button id="printBtn" type="button" class="btn btn-secondary btn-md btn-block">Imprimir</button>
             </div>
-
         </div>
+
+
         <!-- resultados -->
         <img class="d-none d-print-block mb-5" src="https://www.icasei.com.br/logo-icasei-2017-azure.svg" alt="iCasei logo" >
         <div id="print_result" class="row">
@@ -532,7 +540,11 @@ function back() {
 function print_result() {
     window.print();
 }
-        $('#verResultado').on('click', calculate);
+
+/*JQuery events*/
+$('#verResultado').on('click', calculate);
+$('#backBtn').on('click', back);
+$('#printBtn').on('click', print_result);
 
 </script>
 
