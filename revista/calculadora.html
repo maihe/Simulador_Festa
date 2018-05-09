@@ -1,1 +1,552 @@
-<!DOCTYPE html><html lang="pt-BR"><head> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" media="all"> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <style type="text/css"> @media print{.container{width: auto;}#print_result *{visibility: visible;}.table-primary > th{background-color: #64B5F6 !important;}}body{padding-top: 20px}th{font-weight: 600 !important;}.table-primary > th{background-color: #64B5F6 !important; font-weight: 700 !important;}.btn-primary{background-color: #64B5F6 !important; border-color: #64B5F6 !important;}.btn-secondary{background-color:#607D8B !important;}ol{margin-left: -25px;}</style></head><body> <form id="input_form" class="form-inline"> <div class="container col-8"> <div class="row mb-2"> <ol> <li>Insira a quantidade aproximada de Crianças e Adultos. Lembre-se quanto mais preciso, melhor!</li><li>Clique em: Ver Resultado!</li></ol> </div><div class="row mb-2"> <div class="form-group"> <label for="qntAdultos" class="col-2 col-form-label">Adultos</label> <div class="col-10"> <input type="number" class="form-control" id="qntAdultos" placeholder="" min="0"> </div></div></div><div class="row mb-2"> <div class="form-group"> <label for="qntCriancas" class="col-2 col-form-label">Crianças</label> <div class="col-10"> <input type="number" class="form-control" id="qntCriancas" placeholder="" min="0"> </div></div></div><div class="row"> <button id="verResultado" type="button" class="btn btn-primary btn-lg btn-block col-md-4">Ver resultado</button> </div></div><div class="container"> </div></form> <div id="result_tables" class="container mt-5" style="display:none;"> <div class="row d-print-none"> <div class="col-md-6 mb-3"> <button id="backBtn" type="button" class="btn btn-primary btn-md btn-block">Voltar</button> </div><div class="col-md-6 mb-3"> <button id="printBtn" type="button" class="btn btn-secondary btn-md btn-block">Imprimir</button> </div></div><img class="d-none d-print-block mb-5" src="https://www.icasei.com.br/logo-icasei-2017-azure.svg" alt="iCasei logo" > <div id="print_result" class="row"> <div class="col-sm-6 col-md-4"> <div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th colspan="2" >Bebidas</th> </tr></thead> <tbody> <tr> <th>Champagne</th> <th>Garrafas</th> </tr><tr> <td>Servidos durante a festa</td><td id="champ_party">$Value</td></tr><tr> <td>Servido durante apenas no brinde</td><td id="champ_cheers">$Value</td></tr><tr> <th>Uísque (Litros)</th> <th id="wisky_liter">$Value</th> </tr><tr> <th>Cerveja</th> <th>Garrafas 600ml</th> </tr><tr> <td>Festa sem outras bebidas alcoólicas</td><td id="beer_only">$Value</td></tr><tr> <td>Festa com vinhos</td><td id="beer_wine">$Value</td></tr><tr> <td>Festa com vinhos e uísque</td><td id="beer_wisky">$Value</td></tr><tr> <th>Refrigerante</th> <th>Litros</th> </tr><tr> <td>Com outras bebidas (400ml/pessoa)</td><td id="soda_other">$Value</td></tr><tr> <td>Festa com refrigerante e água (600ml/pessoa)</td><td id="soda_water">$Value</td></tr><tr> <th>Água mineral</th> <th id="water">$Value</th> </tr><tr> <th>Coquetel de frutas</th> <th id="fruit_cocktail">$Value</th> </tr></tbody> </table> </div><div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th>Carnes para prato único</th> <th>Quilos</th> </tr></thead> <tbody> <tr> <td>Filet mignon, filet de frango, peixe...</td><td id="dish_meat">$Value</td></tr></tbody> </table> </div><div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th>Churrasco</th> <th>Quilos</th> </tr></thead> <tbody> <tr> <td>Carnes</td><td id="bbq_meat">$Value</td></tr></tbody> </table> </div></div><div class="col-sm-6 col-md-4"> <div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th colspan="2">Buffet de acompanhamentos</th> </tr></thead> <tbody> <tr> <th>Item</th> <th>Quilos</th> </tr><tr> <td>Arroz</td><td id="rice">$Value</td></tr><tr> <td>Risoto</td><td id="risotto">$Value</td></tr><tr> <td>Farofa</td><td id="farofa">$Value</td></tr></tbody> </table> </div><div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th colspan="2">Doces</th> </tr></thead> <tbody> <tr> <th>Docinhos</th> <th>Unidades</th> </tr><tr> <td>Sem sobremesa</td><td id="wo_dessert">$Value</td></tr><tr> <td>Servido após a sobremesa</td><td id="after_dessert">$Value</td></tr><tr> <th>Bolo</th> <th>Quilos</th> </tr><tr> <td>Sem sobremesa</td><td id="cake_wo_dessert">$Value</td></tr><tr> <td>Com outra sobremesa</td><td id="cake_dessert">$Value</td></tr><tr> <th>Bem casado (unidades)</th> <td id="bem_casado">$Value</td></tr><tr> <th>Sorvete (quilos)</th> <td id="icecream">$Value</td></tr><tr> <th>Cupcakes (unidades)</th> <td id="cupcakes">$Value</td></tr></tbody> </table> </div><div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th colspan="2">Salgados</th> </tr></thead> <tbody> <tr> <td>Só Coquetel</td><td id="cocktail_snacks">$Value</td></tr><tr> <td>Com jantar</td><td id="w_dinner">$Value</td></tr></tbody> </table> </div><div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th colspan="2">Buffet de carnes</th> </tr></thead> <tbody> <tr> <th>Carne</th> <th>Quilos</th> </tr><tr> <td>Vermelha</td><td id="red_meat">$Value</td></tr><tr> <td>Aves</td><td id="chicken">$Value</td></tr><tr> <td>Peixes</td><td id="fish">$Value</td></tr></tbody> </table> </div></div><div class="col-sm-6 col-md-4"> <div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th colspan="2">Massas</th> </tr></thead> <tbody> <tr> <th>Tipo</th> <th>Quilos</th> </tr><tr> <td>Acompanhamento</td><td id="side_pasta">$Value</td></tr><tr> <td>Prato principal</td><td id="pasta">$Value</td></tr></tbody> </table> </div><div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th colspan="2">Buffet de saladas</th> </tr></thead> <tbody> <tr> <th>Tipo</th> <th>Quilos</th> </tr><tr> <td>Salada de folhas</td><td id="mixed_leaves">$Value</td></tr><tr> <td>Vegetais cozidos</td><td id="boiled_vegetables">$Value</td></tr><tr> <td>Batata, mandioca...</td><td id="potato_cassava">$Value</td></tr></tbody> </table> </div><div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th >Finger food/Canapés (unidade)</th> <td id="finger_food" style="background-color:white;">$Value</td></tr></thead> </table> </div><div class="mt-2 "> <table class="table table-sm table-bordered"> <thead> <tr class="table-primary"> <th colspan="2">Mesa de pães e frios</th> </tr></thead> <tbody> <tr> <td>Pães (unidade)</td><td id="bread">$Value</td></tr><tr> <td>Frios (caso tenha pães)</td><td id="cold_cuts_bread">$Value</td></tr><tr> <td>Frios (caso não tenha pães)</td><td id="cold_cuts"> $Value</td></tr></tbody> </table> </div></div></div></div><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <script type="text/javascript">function calculate(){var valid=true; var adults=Number(document.getElementById("qntAdultos").value); var child=Number(document.getElementById("qntCriancas").value); if(adults==null || adults==undefined || adults < 1){valid=false; $('#qntAdultos').css("border-color","red");}if(child==null || child==undefined || child < 1){valid=false; $('#qntCriancas').css("border-color","red");}if(!valid) return; //alert("adultos " + adults + " " + "criancas " + child); var totalGuest=(child / 2) + adults; $("#input_form").fadeOut(1, ()=>{/*DRINKS*/ var champ_party=Math.round(0.5 * totalGuest); var champ_cheers=Math.round(0.125 * totalGuest); var wisky_liter=Math.round(0.1 * totalGuest); var beer_only=Math.round(1 * totalGuest); var beer_wine=Math.round(totalGuest / 4); var beer_wisky=Math.round(totalGuest / 6); var soda_other=Math.round(0.4 * totalGuest); var soda_water=Math.round(0.6 * totalGuest); var water=Math.round(0.2 * totalGuest); var fruit_cocktail=Math.round(0.03 * totalGuest); /*MEAT*/ var dish_meat=Math.round(0.25 * totalGuest); /*BBQ*/ var bbq_meat=Math.round(0.4 * totalGuest); /*BUFFET SIDE DISH*/ var rice=Math.round(0.08 * totalGuest); var risotto=Math.round(0.1 * totalGuest); var farofa=Math.round(0.08 * totalGuest); /*SWEET STUFF*/ var wo_dessert=Math.round(7 * totalGuest); var after_dessert=Math.round(3 * totalGuest); var cake_wo_dessert=Math.round(0.1 * totalGuest); var cake_dessert=Math.round(0.06 * totalGuest); var bem_casado=Math.round(3 * totalGuest); var icecream=Math.round(0.1 * totalGuest); var cupcakes=Math.round(1.5 * totalGuest); /*SNACKS*/ var cocktail_snacks=Math.round(15 * totalGuest); var w_dinner=Math.round(7 * totalGuest); /*BUFFET MEATS*/ var red_meat=Math.round(0.15 * totalGuest); var chicken=Math.round(0.1 * totalGuest); var fish=Math.round(0.08 * totalGuest); /*PASTA*/ var side_pasta=Math.round(0.12 * totalGuest); var pasta=Math.round(0.2 * totalGuest); /*BUFFET SALAD*/ var mixed_leaves=Math.round(0.08 * totalGuest); var boiled_vegetables=Math.round(0.08 * totalGuest); var potato_cassava=Math.round(0.08 * totalGuest); var finger_food=Math.round(20 * totalGuest); /*BREAD*/ var bread=Math.round(3 * totalGuest); var cold_cuts_bread=Math.round(0.1 * totalGuest); var cold_cuts=Math.round(0.15 * totalGuest); document.getElementById("champ_party").innerText=champ_party; document.getElementById("champ_cheers").innerText=champ_cheers; document.getElementById("wisky_liter").innerText=wisky_liter; document.getElementById("beer_only").innerText=beer_only; document.getElementById("beer_wine").innerText=beer_wine; document.getElementById("beer_wisky").innerText=beer_wisky; document.getElementById("soda_other").innerText=soda_other; document.getElementById("soda_water").innerText=soda_water; document.getElementById("water").innerText=water; document.getElementById("fruit_cocktail").innerText=fruit_cocktail; document.getElementById("dish_meat").innerText=dish_meat; document.getElementById("bbq_meat").innerText=bbq_meat; document.getElementById("rice").innerText=rice; document.getElementById("risotto").innerText=risotto; document.getElementById("farofa").innerText=farofa; document.getElementById("wo_dessert").innerText=wo_dessert; document.getElementById("after_dessert").innerText=after_dessert; document.getElementById("cake_wo_dessert").innerText=cake_wo_dessert; document.getElementById("cake_dessert").innerText=cake_dessert; document.getElementById("bem_casado").innerText=bem_casado; document.getElementById("icecream").innerText=icecream; document.getElementById("cupcakes").innerText=cupcakes; document.getElementById("cocktail_snacks").innerText=cocktail_snacks; document.getElementById("w_dinner").innerText=w_dinner; document.getElementById("red_meat").innerText=red_meat; document.getElementById("chicken").innerText=chicken; document.getElementById("fish").innerText=fish; document.getElementById("side_pasta").innerText=side_pasta; document.getElementById("pasta").innerText=pasta; document.getElementById("mixed_leaves").innerText=mixed_leaves; document.getElementById("boiled_vegetables").innerText=boiled_vegetables; document.getElementById("potato_cassava").innerText=potato_cassava; document.getElementById("finger_food").innerText=finger_food; document.getElementById("bread").innerText=bread; document.getElementById("cold_cuts_bread").innerText=cold_cuts_bread; document.getElementById("cold_cuts").innerText=cold_cuts; $("#result_tables").fadeIn();});}function back(){$("#result_tables").fadeOut(1, ()=>{$("#input_form").fadeIn();});}function print_result(){window.print();}/*JQuery events*/$('#verResultado').on('click', calculate);$('#backBtn').on('click', back);$('#printBtn').on('click', print_result);</script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" media="all">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style type="text/css">
+        @media print
+        {
+            .container { width: auto; }
+            #print_result * { visibility: visible; }
+            .table-primary > th {background-color: #64B5F6 !important;}
+        }
+        body{ padding-top: 20px }
+        th{ font-weight: 600 !important; }
+        .table-primary > th {background-color: #64B5F6 !important; font-weight: 700 !important;}
+        .btn-primary {background-color: #64B5F6 !important; border-color: #64B5F6 !important;}
+        .btn-secondary {background-color:#607D8B !important;}
+        ol { margin-left: -25px; }
+
+    </style>
+</head>
+
+
+<body>
+
+    <form id="input_form" class="form-inline">
+        <div class="container col-8">
+            <div class="row mb-2">
+                <ol>
+                    <li>Insira a quantidade aproximada de Crianças e Adultos. Lembre-se quanto mais preciso, melhor!</li>
+                    <li>Clique em: Ver Resultado!</li>
+                </ol>
+            </div>
+            <div class="row mb-2">
+                <div class="form-group">
+                    <label for="qntAdultos" class="col-2 col-form-label">Adultos</label>
+                    <div class="col-10">
+                        <input type="number" class="form-control" id="qntAdultos" placeholder="" min="0">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="form-group">
+                    <label for="qntCriancas" class="col-2 col-form-label">Crianças</label>
+                    <div class="col-10">
+                        <input type="number" class="form-control" id="qntCriancas" placeholder="" min="0">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button id="verResultado" type="button" class="btn btn-primary btn-lg btn-block col-md-4">Ver resultado</button>
+            </div>
+        </div>
+
+        <div class="container">
+        </div>
+
+    </form>
+
+
+
+
+
+
+
+
+    <div id="result_tables" class="container mt-5" style="display:none;">
+
+        <div class="row d-print-none">
+            <div class="col-md-6 mb-3">
+                <button id="backBtn" type="button" class="btn btn-primary btn-md btn-block">Voltar</button>
+            </div>
+            <div class="col-md-6 mb-3">
+                <button id="printBtn" type="button" class="btn btn-secondary btn-md btn-block">Imprimir</button>
+            </div>
+        </div>
+
+
+        <!-- resultados -->
+        <img class="d-none d-print-block mb-5" src="https://www.icasei.com.br/logo-icasei-2017-azure.svg" alt="iCasei logo" >
+        <div id="print_result" class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th colspan="2" >Bebidas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Champagne</th>
+                                <th>Garrafas</th>
+                            </tr>
+
+                            <tr>
+                                <td>Servidos durante a festa</td>
+                                <td id="champ_party">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Servido durante apenas no brinde</td>
+                                <td id="champ_cheers">$Value</td>
+                            </tr>
+                            <tr>
+                                <th>Uísque (Litros)</th>
+                                <th id="wisky_liter">$Value</th>
+                            </tr>
+
+                            <tr>
+                                <th>Cerveja</th>
+                                <th>Garrafas 600ml</th>
+                            </tr>
+
+                            <tr>
+                                <td>Festa sem outras bebidas alcoólicas</td>
+                                <td id="beer_only">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Festa com vinhos</td>
+                                <td id="beer_wine">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Festa com vinhos e uísque</td>
+                                <td id="beer_wisky">$Value</td>
+                            </tr>
+                            <tr>
+                                <th>Refrigerante</th>
+                                <th>Litros</th>
+                            </tr>
+
+                            <tr>
+                                <td>Com outras bebidas (400ml/pessoa)</td>
+                                <td id="soda_other">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Festa com refrigerante e água (600ml/pessoa)</td>
+                                <td id="soda_water">$Value</td>
+                            </tr>
+                            <tr>
+                                <th>Água mineral</th>
+                                <th id="water">$Value</th>
+                            </tr>
+
+                            <tr>
+                                <th>Coquetel de frutas</th>
+                                <th id="fruit_cocktail">$Value</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th>Carnes para prato único</th>
+                                <th>Quilos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Filet mignon, filet de frango, peixe...</td>
+                                <td id="dish_meat">$Value</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th>Churrasco</th>
+                                <th>Quilos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Carnes</td>
+                                <td id="bbq_meat">$Value</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th colspan="2">Buffet de acompanhamentos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quilos</th>
+                            </tr>
+                            <tr>
+                                <td>Arroz</td>
+                                <td id="rice">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Risoto</td>
+                                <td id="risotto">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Farofa</td>
+                                <td id="farofa">$Value</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th colspan="2">Doces</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Docinhos</th>
+                                <th>Unidades</th>
+                            </tr>
+                            <tr>
+                                <td>Sem sobremesa</td>
+                                <td id="wo_dessert">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Servido após a sobremesa</td>
+                                <td id="after_dessert">$Value</td>
+                            </tr>
+                            <tr>
+                                <th>Bolo</th>
+                                <th>Quilos</th>
+                            </tr>
+                            <tr>
+                                <td>Sem sobremesa</td>
+                                <td id="cake_wo_dessert">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Com outra sobremesa</td>
+                                <td id="cake_dessert">$Value</td>
+                            </tr>
+                            <tr>
+                                <th>Bem casado (unidades)</th>
+                                <td id="bem_casado">$Value</td>
+                            </tr>
+                            <tr>
+                                <th>Sorvete (quilos)</th>
+                                <td id="icecream">$Value</td>
+                            </tr>
+                            <tr>
+                                <th>Cupcakes (unidades)</th>
+                                <td id="cupcakes">$Value</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th colspan="2">Salgados</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Só Coquetel</td>
+                                <td id="cocktail_snacks">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Com jantar</td>
+                                <td id="w_dinner">$Value</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th colspan="2">Buffet de carnes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Carne</th>
+                                <th>Quilos</th>
+                            </tr>
+                            <tr>
+                                <td>Vermelha</td>
+                                <td id="red_meat">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Aves</td>
+                                <td id="chicken">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Peixes</td>
+                                <td id="fish">$Value</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th colspan="2">Massas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Quilos</th>
+                            </tr>
+                            <tr>
+                                <td>Acompanhamento</td>
+                                <td id="side_pasta">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Prato principal</td>
+                                <td id="pasta">$Value</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th colspan="2">Buffet de saladas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Quilos</th>
+                            </tr>
+                            <tr>
+                                <td>Salada de folhas</td>
+                                <td id="mixed_leaves">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Vegetais cozidos</td>
+                                <td id="boiled_vegetables">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Batata, mandioca...</td>
+                                <td id="potato_cassava">$Value</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th >Finger food/Canapés (unidade)</th>
+                                <td id="finger_food" style="background-color:white;">$Value</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="mt-2 ">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th colspan="2">Mesa de pães e frios</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>Pães (unidade)</td>
+                                <td id="bread">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Frios (caso tenha pães)</td>
+                                <td id="cold_cuts_bread">$Value</td>
+                            </tr>
+                            <tr>
+                                <td>Frios (caso não tenha pães)</td>
+                                <td id="cold_cuts"> $Value</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <!-- -->
+    <script type="text/javascript">
+
+
+        function calculate() {
+            var valid = true;
+            var adults = Number(document.getElementById("qntAdultos").value);
+            var child = Number(document.getElementById("qntCriancas").value);
+            if(adults == null || adults == undefined || adults < 1){
+                valid = false;
+                $('#qntAdultos').css("border-color","red");
+            }
+            if(child == null || child == undefined || child < 1){
+                valid = false;
+                $('#qntCriancas').css("border-color","red");
+            }
+            if(!valid) return;
+
+        //alert("adultos " + adults + " " + "criancas " + child);
+        var totalGuest = (child / 2) + adults;
+
+        $("#input_form").fadeOut(1, ()=> {
+
+            /*DRINKS*/
+            var champ_party = Math.round(0.5 * totalGuest);
+            var champ_cheers = Math.round(0.125 * totalGuest);
+            var wisky_liter = Math.round(0.1 * totalGuest);
+            var beer_only = Math.round(1 * totalGuest);
+            var beer_wine = Math.round(totalGuest / 4);
+            var beer_wisky = Math.round(totalGuest / 6);
+            var soda_other = Math.round(0.4 * totalGuest);
+            var soda_water = Math.round(0.6 * totalGuest);
+            var water = Math.round(0.2 * totalGuest);
+            var fruit_cocktail = Math.round(0.03 * totalGuest);
+
+        /*MEAT*/
+        var dish_meat = Math.round(0.25 * totalGuest);
+        /*BBQ*/
+        var bbq_meat = Math.round(0.4 * totalGuest);
+
+        /*BUFFET SIDE DISH*/
+        var rice = Math.round(0.08 * totalGuest);
+        var risotto = Math.round(0.1 * totalGuest);
+        var farofa = Math.round(0.08 * totalGuest);
+
+        /*SWEET STUFF*/
+        var wo_dessert = Math.round(7 * totalGuest);
+        var after_dessert = Math.round(3 * totalGuest);
+        var cake_wo_dessert = Math.round(0.1 * totalGuest);
+        var cake_dessert = Math.round(0.06 * totalGuest);
+        var bem_casado = Math.round(3 * totalGuest);
+        var icecream = Math.round(0.1 * totalGuest);
+        var cupcakes = Math.round(1.5 * totalGuest);
+
+        /*SNACKS*/
+        var cocktail_snacks = Math.round(15 * totalGuest);
+        var w_dinner = Math.round(7 * totalGuest);
+
+        /*BUFFET MEATS*/
+        var red_meat = Math.round(0.15 * totalGuest);
+        var chicken = Math.round(0.1 * totalGuest);
+        var fish = Math.round(0.08 * totalGuest);
+
+        /*PASTA*/
+        var side_pasta = Math.round(0.12 * totalGuest);
+        var pasta = Math.round(0.2 * totalGuest);
+
+        /*BUFFET SALAD*/
+        var mixed_leaves = Math.round(0.08 * totalGuest);
+        var boiled_vegetables = Math.round(0.08 * totalGuest);
+        var potato_cassava = Math.round(0.08 * totalGuest);
+
+        var finger_food = Math.round(20 * totalGuest);
+
+        /*BREAD*/
+        var bread = Math.round(3 * totalGuest);
+        var cold_cuts_bread = Math.round(0.1 * totalGuest);
+        var cold_cuts = Math.round(0.15 * totalGuest);
+
+
+        document.getElementById("champ_party").innerText = champ_party;
+        document.getElementById("champ_cheers").innerText = champ_cheers;
+        document.getElementById("wisky_liter").innerText = wisky_liter;
+        document.getElementById("beer_only").innerText = beer_only;
+        document.getElementById("beer_wine").innerText = beer_wine;
+        document.getElementById("beer_wisky").innerText = beer_wisky;
+        document.getElementById("soda_other").innerText = soda_other;
+        document.getElementById("soda_water").innerText = soda_water;
+        document.getElementById("water").innerText = water;
+        document.getElementById("fruit_cocktail").innerText = fruit_cocktail;
+        document.getElementById("dish_meat").innerText = dish_meat;
+        document.getElementById("bbq_meat").innerText = bbq_meat;
+        document.getElementById("rice").innerText = rice;
+        document.getElementById("risotto").innerText = risotto;
+        document.getElementById("farofa").innerText = farofa;
+        document.getElementById("wo_dessert").innerText = wo_dessert;
+        document.getElementById("after_dessert").innerText = after_dessert;
+        document.getElementById("cake_wo_dessert").innerText = cake_wo_dessert;
+        document.getElementById("cake_dessert").innerText = cake_dessert;
+        document.getElementById("bem_casado").innerText = bem_casado;
+        document.getElementById("icecream").innerText = icecream;
+        document.getElementById("cupcakes").innerText = cupcakes;
+        document.getElementById("cocktail_snacks").innerText = cocktail_snacks;
+        document.getElementById("w_dinner").innerText = w_dinner;
+        document.getElementById("red_meat").innerText = red_meat;
+        document.getElementById("chicken").innerText = chicken;
+        document.getElementById("fish").innerText = fish;
+        document.getElementById("side_pasta").innerText = side_pasta;
+        document.getElementById("pasta").innerText = pasta;
+        document.getElementById("mixed_leaves").innerText = mixed_leaves;
+        document.getElementById("boiled_vegetables").innerText = boiled_vegetables;
+        document.getElementById("potato_cassava").innerText = potato_cassava;
+        document.getElementById("finger_food").innerText = finger_food;
+        document.getElementById("bread").innerText = bread;
+        document.getElementById("cold_cuts_bread").innerText = cold_cuts_bread;
+        document.getElementById("cold_cuts").innerText = cold_cuts;
+
+        $("#result_tables").fadeIn();
+            });
+}
+
+
+function back() {
+    $("#result_tables").fadeOut(1, ()=> {
+        $("#input_form").fadeIn();
+    });
+
+}
+
+function print_result() {
+    window.print();
+}
+
+/*JQuery events*/
+$('#verResultado').on('click', calculate);
+$('#backBtn').on('click', back);
+$('#printBtn').on('click', print_result);
+
+</script>
+
+</body>
+</html>
